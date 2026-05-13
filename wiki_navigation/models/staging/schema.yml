@@ -1,0 +1,14 @@
+models:
+  - name: stg_clickstream
+    columns:
+      - name: source_page
+        tests:
+          - not_null
+
+      - name: destination_page
+        tests:
+          - not_null
+
+      - name: click_count
+        tests:
+          - not_null

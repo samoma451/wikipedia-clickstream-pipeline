@@ -5,7 +5,7 @@ Transforms raw Wikipedia clickstream logs into analytical models using dbt.
 
 ## Architecture
 - Python ingestion scripts
-- DuckDB or warehouse layer
+- DuckDB
 - dbt transformation layer
 - Analytics marts
 

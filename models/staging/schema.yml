@@ -1,11 +1,16 @@
 models:
-  - name: stg_clickstream
+  - name: fct_navigation_edges
     columns:
+      - name: edge_key
+        tests:
+          - unique
+          - not_null
+
       - name: source_page
         tests:
           - not_null
 
-      - name: destination_page
+      - name: target_page
         tests:
           - not_null
 

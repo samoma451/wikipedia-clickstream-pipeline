@@ -1,17 +1,38 @@
 import duckdb
-import os
 
-DB_PATH = "data/processed/wiki.duckdb"
-DATA_PATH = "data/raw/clickstream.tsv.gz" #using 2026-04 data currently
+RAW_PATH = "data/raw/clickstream.tsv.gz"
+DB_PATH = "clickstream.duckdb"
 
-os.makedirs("data/processed", exist_ok=True)
+def load_to_duckdb():
+    con = duckdb.connect(DB_PATH)
 
-con = duckdb.connect(DB_PATH)
+    con.execute("""
+        CREATE OR REPLACE TABLE clickstream AS
+        SELECT *
+        FROM read_csv(
+        'data/raw/clickstream.tsv.gz',
+        delim='\t',
+        header=false
+            )
+    """)
 
-con.execute("""
-CREATE OR REPLACE TABLE raw_clickstream AS
-SELECT *
-FROM read_csv_auto(?)
-""", [DATA_PATH])
+    con.execute("""
+    ALTER TABLE clickstream RENAME COLUMN column0 TO prev;
+    """)
 
-print("Loaded clickstream into DuckDB")
+    con.execute("""
+    ALTER TABLE clickstream RENAME COLUMN column1 TO curr;
+    """)
+
+    con.execute("""
+    ALTER TABLE clickstream RENAME COLUMN column2 TO type;
+    """)
+
+    con.execute("""
+    ALTER TABLE clickstream RENAME COLUMN column3 TO n;
+    """)
+
+    print("Loaded TSV.GZ into DuckDB table: clickstream")
+
+if __name__ == "__main__":
+    load_to_duckdb()

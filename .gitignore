@@ -1,11 +1,33 @@
-# data
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+.venv/
+
+# Environment variables
+.env
+
+# Data 
 data/raw/
-data/processed/*.duckdb
+data/processed/
 
 # dbt
-dbt/target/
-dbt/logs/
+target/
+dbt_packages/
+logs/
 
-# python
-.venv/
-__pycache__/
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter (if you ever add notebooks)
+.ipynb_checkpoints/
+dbt_internal_packages/
+
+# DuckDB databases
+*.duckdb
+*.db
+*.sqlite

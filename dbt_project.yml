@@ -1,0 +1,19 @@
+name: wiki_navigation
+version: 1.0.0
+config-version: 2
+
+profile: wiki_navigation
+
+model-paths: ["models"]
+
+models:
+  wiki_navigation:
+    staging:
+      +materialized: view
+
+    marts:
+      core:
+        +materialized: table
+
+      analytics:
+        +materialized: table
